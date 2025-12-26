@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "resource-id_v01.json",
+  "title": "ResourceId",
+  "type": "string",
+  "description": "Stable resource identifier",
+  "minLength": 1
+}

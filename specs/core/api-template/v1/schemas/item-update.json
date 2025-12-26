@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "item-update.json",
+  "title": "ItemUpdateRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name for the item"
+    },
+    "status": {
+      "$ref": "../../../../core/common/item-status_v01.json"
+    }
+  },
+  "minProperties": 1
+}

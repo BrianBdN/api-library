@@ -1,0 +1,18 @@
+{
+  "operations": [
+    {
+      "id": "op-1",
+      "method": "POST",
+      "path": "/core/v1/items",
+      "body": {
+        "name": "Widget",
+        "status": "active"
+      }
+    },
+    {
+      "id": "op-2",
+      "method": "GET",
+      "path": "/core/v1/items/itm_12345"
+    }
+  ]
+}

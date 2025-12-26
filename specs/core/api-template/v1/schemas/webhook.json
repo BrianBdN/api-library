@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "webhook.json",
+  "title": "Webhook",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "../../../../common/resource-id_v01.json"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Delivery endpoint URL"
+    },
+    "events": {
+      "type": "array",
+      "description": "Event types delivered to the webhook",
+      "items": {
+        "$ref": "../../../../common/webhook-event_v01.json"
+      },
+      "minItems": 1
+    },
+    "status": {
+      "$ref": "../../../../common/webhook-status_v01.json"
+    },
+    "createdAt": {
+      "$ref": "../../../../common/iso-timestamp_v01.json"
+    },
+    "updatedAt": {
+      "$ref": "../../../../common/iso-timestamp_v01.json"
+    }
+  },
+  "required": [
+    "id",
+    "url",
+    "events",
+    "status",
+    "createdAt",
+    "updatedAt"
+  ]
+}

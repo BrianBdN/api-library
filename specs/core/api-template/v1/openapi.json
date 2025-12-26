@@ -1,0 +1,949 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "API Template",
+    "version": "v1",
+    "description": "Template for JSON-based REST APIs using /<domain>/v<version>/collection-resource URIs."
+  },
+  "servers": [
+    {
+      "url": "https://api.example.com",
+      "description": "Production"
+    },
+    {
+      "url": "https://sandbox.api.example.com",
+      "description": "Sandbox"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Items",
+      "description": "Example resource group"
+    },
+    {
+      "name": "Batch",
+      "description": "Batch operations"
+    },
+    {
+      "name": "Jobs",
+      "description": "Async job processing"
+    },
+    {
+      "name": "Webhooks",
+      "description": "Event delivery configuration"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/core/v1/items": {
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "List items",
+        "operationId": "listItems",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/odataTop"
+          },
+          {
+            "$ref": "#/components/parameters/odataSkip"
+          },
+          {
+            "$ref": "#/components/parameters/odataSkipToken"
+          },
+          {
+            "$ref": "#/components/parameters/odataOrderBy"
+          },
+          {
+            "$ref": "#/components/parameters/odataFilter"
+          },
+          {
+            "$ref": "#/components/parameters/odataCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ItemListResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Create item",
+        "operationId": "createItem",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ItemCreate"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/ItemResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          }
+        }
+      }
+    },
+    "/core/v1/items/{itemId}": {
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Get item",
+        "operationId": "getItem",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/itemId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ItemResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Replace item",
+        "operationId": "replaceItem",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/itemId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ItemReplace"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ItemResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Update item",
+        "operationId": "updateItem",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/itemId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ItemUpdate"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ItemResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Delete item",
+        "operationId": "deleteItem",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/itemId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/core/v1/items/search": {
+      "post": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Search items",
+        "operationId": "searchItems",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ItemSearch"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ItemListResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/core/v1/items/batch": {
+      "post": {
+        "tags": [
+          "Batch"
+        ],
+        "summary": "Batch operations on items",
+        "operationId": "batchItems",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/BatchRequest"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/BatchResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/core/v1/jobs": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Create async job",
+        "operationId": "createJob",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/JobCreate"
+        },
+        "responses": {
+          "202": {
+            "$ref": "#/components/responses/JobResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/core/v1/jobs/{jobId}": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Get job",
+        "operationId": "getJob",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/jobId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JobResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/core/v1/webhooks": {
+      "get": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "List webhooks",
+        "operationId": "listWebhooks",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/odataTop"
+          },
+          {
+            "$ref": "#/components/parameters/odataSkip"
+          },
+          {
+            "$ref": "#/components/parameters/odataSkipToken"
+          },
+          {
+            "$ref": "#/components/parameters/odataOrderBy"
+          },
+          {
+            "$ref": "#/components/parameters/odataFilter"
+          },
+          {
+            "$ref": "#/components/parameters/odataCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/WebhookListResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Create webhook",
+        "operationId": "createWebhook",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/WebhookCreate"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/WebhookResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          }
+        }
+      }
+    },
+    "/core/v1/webhooks/{webhookId}": {
+      "get": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Get webhook",
+        "operationId": "getWebhook",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/webhookId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/WebhookResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Replace webhook",
+        "operationId": "replaceWebhook",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/webhookId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/WebhookReplace"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/WebhookResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Update webhook",
+        "operationId": "updateWebhook",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/webhookId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/WebhookUpdate"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/WebhookResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Delete webhook",
+        "operationId": "deleteWebhook",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/webhookId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Item": {
+        "$ref": "./schemas/item.json"
+      },
+      "ItemCreateRequest": {
+        "$ref": "./schemas/item-create.json"
+      },
+      "ItemReplaceRequest": {
+        "$ref": "./schemas/item-replace.json"
+      },
+      "ItemUpdateRequest": {
+        "$ref": "./schemas/item-update.json"
+      },
+      "ItemSearchRequest": {
+        "$ref": "./schemas/item-search.json"
+      },
+      "BatchRequest": {
+        "$ref": "./schemas/batch-request.json"
+      },
+      "BatchResponse": {
+        "$ref": "./schemas/batch-response.json"
+      },
+      "Job": {
+        "$ref": "./schemas/job.json"
+      },
+      "JobCreateRequest": {
+        "$ref": "./schemas/job-create.json"
+      },
+      "Webhook": {
+        "$ref": "./schemas/webhook.json"
+      },
+      "WebhookCreateRequest": {
+        "$ref": "./schemas/webhook-create.json"
+      },
+      "WebhookReplaceRequest": {
+        "$ref": "./schemas/webhook-replace.json"
+      },
+      "WebhookUpdateRequest": {
+        "$ref": "./schemas/webhook-update.json"
+      },
+      "Error": {
+        "$ref": "./schemas/error.json"
+      }
+    },
+    "parameters": {
+      "itemId": {
+        "name": "itemId",
+        "in": "path",
+        "required": true,
+        "description": "Unique identifier for the item",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "jobId": {
+        "name": "jobId",
+        "in": "path",
+        "required": true,
+        "description": "Unique identifier for the job",
+        "schema": {
+          "$ref": "../../../../common/resource-id_v01.json"
+        }
+      },
+      "webhookId": {
+        "name": "webhookId",
+        "in": "path",
+        "required": true,
+        "description": "Unique identifier for the webhook",
+        "schema": {
+          "$ref": "../../../../common/resource-id_v01.json"
+        }
+      },
+      "odataTop": {
+        "name": "$top",
+        "in": "query",
+        "description": "OData: max items to return.",
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200,
+          "default": 50
+        }
+      },
+      "odataSkip": {
+        "name": "$skip",
+        "in": "query",
+        "description": "OData: number of items to skip.",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "odataSkipToken": {
+        "name": "$skiptoken",
+        "in": "query",
+        "description": "OData: server-driven paging token from @odata.nextLink.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "odataOrderBy": {
+        "name": "$orderby",
+        "in": "query",
+        "description": "OData: order by fields (e.g., name desc, createdAt asc).",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "odataFilter": {
+        "name": "$filter",
+        "in": "query",
+        "description": "OData: filter expression (e.g., status eq 'active' and createdAt ge 2024-01-01T00:00:00Z).",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "odataCount": {
+        "name": "$count",
+        "in": "query",
+        "description": "OData: request a total count of matching items.",
+        "schema": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "requestBodies": {
+      "ItemCreate": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ItemCreateRequest"
+            },
+            "examples": {
+              "example": {
+                "summary": "Create request",
+                "externalValue": "./examples/item-create.json"
+              }
+            }
+          }
+        }
+      },
+      "ItemReplace": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ItemReplaceRequest"
+            },
+            "examples": {
+              "example": {
+                "summary": "Replace request",
+                "externalValue": "./examples/item-create.json"
+              }
+            }
+          }
+        }
+      },
+      "ItemUpdate": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ItemUpdateRequest"
+            },
+            "examples": {
+              "example": {
+                "summary": "Update request",
+                "externalValue": "./examples/item-update.json"
+              }
+            }
+          }
+        }
+      },
+      "ItemSearch": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ItemSearchRequest"
+            },
+            "examples": {
+              "example": {
+                "summary": "Search request",
+                "externalValue": "./examples/item-search.json"
+              }
+            }
+          }
+        }
+      },
+      "BatchRequest": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BatchRequest"
+            },
+            "examples": {
+              "example": {
+                "summary": "Batch request",
+                "externalValue": "./examples/batch-request.json"
+              }
+            }
+          }
+        }
+      },
+      "JobCreate": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/JobCreateRequest"
+            },
+            "examples": {
+              "example": {
+                "summary": "Job create request",
+                "externalValue": "./examples/job-create.json"
+              }
+            }
+          }
+        }
+      },
+      "WebhookCreate": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/WebhookCreateRequest"
+            },
+            "examples": {
+              "example": {
+                "summary": "Webhook create request",
+                "externalValue": "./examples/webhook-create.json"
+              }
+            }
+          }
+        }
+      },
+      "WebhookReplace": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/WebhookReplaceRequest"
+            },
+            "examples": {
+              "example": {
+                "summary": "Webhook replace request",
+                "externalValue": "./examples/webhook-create.json"
+              }
+            }
+          }
+        }
+      },
+      "WebhookUpdate": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/WebhookUpdateRequest"
+            },
+            "examples": {
+              "example": {
+                "summary": "Webhook update request",
+                "externalValue": "./examples/webhook-create.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "ItemResponse": {
+        "description": "Single item",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Item"
+            },
+            "examples": {
+              "example": {
+                "summary": "Item response",
+                "externalValue": "./examples/item-response.json"
+              }
+            }
+          }
+        }
+      },
+      "ItemListResponse": {
+        "description": "List of items",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "OData metadata context URL"
+                },
+                "@odata.nextLink": {
+                  "type": "string",
+                  "description": "OData URL for the next page when server-driven paging is used"
+                },
+                "@odata.count": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Total count of matching items when $count=true"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Item"
+                  }
+                }
+              },
+              "required": [
+                "value"
+              ]
+            },
+            "examples": {
+              "example": {
+                "summary": "Item list response",
+                "externalValue": "./examples/item-list.json"
+              }
+            }
+          }
+        }
+      },
+      "BatchResponse": {
+        "description": "Batch operation results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BatchResponse"
+            },
+            "examples": {
+              "example": {
+                "summary": "Batch response",
+                "externalValue": "./examples/batch-response.json"
+              }
+            }
+          }
+        }
+      },
+      "JobResponse": {
+        "description": "Async job",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Job"
+            },
+            "examples": {
+              "example": {
+                "summary": "Job response",
+                "externalValue": "./examples/job-response.json"
+              }
+            }
+          }
+        }
+      },
+      "WebhookResponse": {
+        "description": "Webhook",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Webhook"
+            },
+            "examples": {
+              "example": {
+                "summary": "Webhook response",
+                "externalValue": "./examples/webhook-response.json"
+              }
+            }
+          }
+        }
+      },
+      "WebhookListResponse": {
+        "description": "List of webhooks",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "OData metadata context URL"
+                },
+                "@odata.nextLink": {
+                  "type": "string",
+                  "description": "OData URL for the next page when server-driven paging is used"
+                },
+                "@odata.count": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Total count of matching items when $count=true"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Webhook"
+                  }
+                }
+              },
+              "required": [
+                "value"
+              ]
+            },
+            "examples": {
+              "example": {
+                "summary": "Webhook list response",
+                "externalValue": "./examples/webhook-list.json"
+              }
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "Conflict",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    }
+  }
+}

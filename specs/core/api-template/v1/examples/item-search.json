@@ -1,0 +1,7 @@
+{
+  "search": "widget",
+  "filter": "status eq 'active'",
+  "orderby": "createdAt desc",
+  "top": 25,
+  "includeCount": true
+}

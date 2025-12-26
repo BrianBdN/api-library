@@ -1,0 +1,8 @@
+{
+  "id": "job_12345",
+  "type": "item-export",
+  "status": "running",
+  "createdAt": "2024-01-21T10:00:00Z",
+  "updatedAt": "2024-01-21T10:05:00Z",
+  "resultUrl": "https://api.example.com/core/v1/jobs/job_12345/result"
+}

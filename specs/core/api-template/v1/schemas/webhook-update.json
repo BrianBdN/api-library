@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "webhook-update.json",
+  "title": "WebhookUpdateRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Delivery endpoint URL"
+    },
+    "events": {
+      "type": "array",
+      "description": "Event types delivered to the webhook",
+      "items": {
+        "$ref": "../../../../common/webhook-event_v01.json"
+      },
+      "minItems": 1
+    },
+    "status": {
+      "$ref": "../../../../common/webhook-status_v01.json"
+    }
+  },
+  "minProperties": 1
+}

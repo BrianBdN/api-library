@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "webhook-create.json",
+  "title": "WebhookCreateRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Delivery endpoint URL"
+    },
+    "events": {
+      "type": "array",
+      "description": "Event types delivered to the webhook",
+      "items": {
+        "$ref": "../../../../common/webhook-event_v01.json"
+      },
+      "minItems": 1
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "../../../../common/webhook-status_v01.json"
+        }
+      ],
+      "description": "Webhook status",
+      "default": "active"
+    }
+  },
+  "required": [
+    "url",
+    "events"
+  ]
+}

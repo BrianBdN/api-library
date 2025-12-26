@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "webhook-status_v01.json",
+  "title": "WebhookStatus",
+  "type": "string",
+  "description": "Webhook status",
+  "enum": [
+    "active",
+    "disabled"
+  ]
+}

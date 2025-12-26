@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "batch-request.json",
+  "title": "BatchRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/operation"
+      }
+    }
+  },
+  "required": [
+    "operations"
+  ],
+  "$defs": {
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Client-provided operation identifier"
+        },
+        "method": {
+          "type": "string",
+          "description": "HTTP method",
+          "enum": [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "description": "Relative resource path (e.g., /core/v1/items)"
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "body": {
+          "type": "object",
+          "description": "JSON payload for the operation",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "path"
+      ]
+    }
+  }
+}

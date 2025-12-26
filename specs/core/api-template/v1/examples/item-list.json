@@ -1,0 +1,21 @@
+{
+  "@odata.context": "https://api.example.com/core/v1/$metadata#items",
+  "@odata.nextLink": "https://api.example.com/core/v1/items?$skiptoken=eyJwYWdlIjoxfQ",
+  "@odata.count": 2,
+  "value": [
+    {
+      "id": "itm_12345",
+      "name": "Widget",
+      "status": "active",
+      "createdAt": "2024-01-15T12:00:00Z",
+      "updatedAt": "2024-01-20T09:30:00Z"
+    },
+    {
+      "id": "itm_67890",
+      "name": "Gadget",
+      "status": "inactive",
+      "createdAt": "2024-01-10T08:15:00Z",
+      "updatedAt": "2024-01-18T14:45:00Z"
+    }
+  ]
+}

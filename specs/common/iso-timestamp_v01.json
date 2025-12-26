@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "iso-timestamp_v01.json",
+  "title": "IsoTimestamp",
+  "type": "string",
+  "format": "date-time",
+  "description": "RFC 3339 timestamp"
+}

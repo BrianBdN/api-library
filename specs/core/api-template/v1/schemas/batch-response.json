@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "batch-response.json",
+  "title": "BatchResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "responses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/result"
+      }
+    }
+  },
+  "required": [
+    "responses"
+  ],
+  "$defs": {
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Operation identifier"
+        },
+        "status": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 599,
+          "description": "HTTP status code for the operation"
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "body": {
+          "type": "object",
+          "description": "JSON response body for the operation",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    }
+  }
+}

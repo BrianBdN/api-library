@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "job-create.json",
+  "title": "JobCreateRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "$ref": "../../../../common/job-type_v01.json"
+    },
+    "parameters": {
+      "type": "object",
+      "description": "Job-specific parameters",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "type"
+  ]
+}

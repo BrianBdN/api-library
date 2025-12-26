@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "item.json",
+  "title": "Item",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "../../../../common/resource-id_v01.json"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name for the item"
+    },
+    "status": {
+      "$ref": "../../../../core/common/item-status_v01.json"
+    },
+    "createdAt": {
+      "$ref": "../../../../common/iso-timestamp_v01.json"
+    },
+    "updatedAt": {
+      "$ref": "../../../../common/iso-timestamp_v01.json"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "status",
+    "createdAt",
+    "updatedAt"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "job-status_v01.json",
+  "title": "JobStatus",
+  "type": "string",
+  "description": "Async job status",
+  "enum": [
+    "queued",
+    "running",
+    "succeeded",
+    "failed",
+    "canceled"
+  ]
+}

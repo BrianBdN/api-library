@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "job-type_v01.json",
+  "title": "JobType",
+  "type": "string",
+  "description": "Job type identifier",
+  "minLength": 1
+}

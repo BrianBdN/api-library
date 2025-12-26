@@ -1,0 +1,17 @@
+{
+  "@odata.context": "https://api.example.com/core/v1/$metadata#webhooks",
+  "@odata.count": 1,
+  "value": [
+    {
+      "id": "wh_12345",
+      "url": "https://hooks.example.com/items",
+      "events": [
+        "items.created",
+        "items.updated"
+      ],
+      "status": "active",
+      "createdAt": "2024-01-12T08:00:00Z",
+      "updatedAt": "2024-01-20T11:45:00Z"
+    }
+  ]
+}

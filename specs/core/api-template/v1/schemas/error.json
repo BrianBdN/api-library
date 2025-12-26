@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "error.json",
+  "title": "Error",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "Stable error code"
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable error message"
+    },
+    "details": {
+      "type": "array",
+      "description": "Optional error details",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    }
+  },
+  "required": [
+    "code",
+    "message"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "job.json",
+  "title": "Job",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "../../../../common/resource-id_v01.json"
+    },
+    "type": {
+      "$ref": "../../../../common/job-type_v01.json"
+    },
+    "status": {
+      "$ref": "../../../../common/job-status_v01.json"
+    },
+    "createdAt": {
+      "$ref": "../../../../common/iso-timestamp_v01.json"
+    },
+    "updatedAt": {
+      "$ref": "../../../../common/iso-timestamp_v01.json"
+    },
+    "resultUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL for job result retrieval when available"
+    },
+    "error": {
+      "type": "object",
+      "description": "Error information when the job fails",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "status",
+    "createdAt",
+    "updatedAt"
+  ]
+}

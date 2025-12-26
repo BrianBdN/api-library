@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "item-create.json",
+  "title": "ItemCreateRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name for the item"
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "../../../../core/common/item-status_v01.json"
+        }
+      ],
+      "description": "Initial lifecycle status",
+      "default": "active"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

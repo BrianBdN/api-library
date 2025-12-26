@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "item-status_v01.json",
+  "title": "ItemStatus",
+  "type": "string",
+  "description": "Lifecycle status",
+  "enum": [
+    "active",
+    "inactive",
+    "archived"
+  ]
+}
