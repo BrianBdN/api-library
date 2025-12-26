@@ -3,15 +3,19 @@
   "info": {
     "title": "API Template",
     "version": "v1",
-    "description": "Template for JSON-based REST APIs using /<domain>/v<version>/collection-resource URIs."
+    "description": "Template for JSON-based REST APIs using /<domain>/v<version>/collection-resource URIs.",
+    "license": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    }
   },
   "servers": [
     {
-      "url": "https://api.example.com",
+      "url": "https://api.yourdomain.tld",
       "description": "Production"
     },
     {
-      "url": "https://sandbox.api.example.com",
+      "url": "https://sandbox.api.yourdomain.tld",
       "description": "Sandbox"
     }
   ],
@@ -535,7 +539,7 @@
         "required": true,
         "description": "Unique identifier for the job",
         "schema": {
-          "$ref": "../../../../common/resource-id_v01.json"
+          "$ref": "../../../common/resource-id_v01.json"
         }
       },
       "webhookId": {
@@ -544,7 +548,7 @@
         "required": true,
         "description": "Unique identifier for the webhook",
         "schema": {
-          "$ref": "../../../../common/resource-id_v01.json"
+          "$ref": "../../../common/resource-id_v01.json"
         }
       },
       "odataTop": {
